@@ -57,12 +57,12 @@ jobs:
         run: |
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL squad2-ecr:latest
 
-      - name: Log in to GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+   #   - name: Log in to GHCR
+    #    run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Scan Docker image with Trivy for any vulnerabilities
-        run: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity LOW,MEDIUM,HIGH,CRITICAL mock-ecr-repo:latest
+     # - name: Scan Docker image with Trivy for any vulnerabilities
+      #  run: |
+       #   docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity LOW,MEDIUM,HIGH,CRITICAL mock-ecr-repo:latest
 
       #Tag Docker image
       - name: Tag Docker image
