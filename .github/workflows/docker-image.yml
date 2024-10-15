@@ -76,7 +76,7 @@ jobs:
       - name: Push Docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: mock-erc-repo
+          REPOSITORY: squad2-ecr
         run: |
           docker push 326319537952.dkr.ecr.us-east-1.amazonaws.com/squad2-ecr:latest
       
