@@ -49,13 +49,12 @@ jobs:
       - name: Build Docker image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: mock-erc-repo
+          REPOSITORY: squad2-ecr
         run: |
-          docker build -t mock-ecr-repo .
+          docker build -t squad2-ecr .
           
       - name: Scan Docker image with Trivy for any vulnerabilities
         run: |
-         # docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --exit-code 1 --severity HIGH,CRITICAL mock-react:latest
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity LOW,MEDIUM,HIGH,CRITICAL mock-ecr-repo:latest
 
       - name: Log in to GHCR
@@ -65,22 +64,22 @@ jobs:
         run: |
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity LOW,MEDIUM,HIGH,CRITICAL mock-ecr-repo:latest
 
-      # Step 4: Tag Docker image (latest only)
+      #Tag Docker image
       - name: Tag Docker image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: mock-erc-repo
+          REPOSITORY: squad2-ecr
         run: |
-          docker tag mock-ecr-repo:latest 783764619143.dkr.ecr.us-east-1.amazonaws.com/mock-ecr-repo:latest
-
-      # Step 5: Push Docker image to Amazon ECR (latest only)
+          docker tag squad2-ecr:latest 326319537952.dkr.ecr.us-east-1.amazonaws.com/squad2-ecr:latest
+          
+      # Push Docker image to Amazon ECR (latest only)
       - name: Push Docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: mock-erc-repo
         run: |
-          docker push 783764619143.dkr.ecr.us-east-1.amazonaws.com/mock-ecr-repo:latest
-      ###     
+          docker push 326319537952.dkr.ecr.us-east-1.amazonaws.com/squad2-ecr:latest
+      
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
