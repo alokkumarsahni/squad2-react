@@ -65,15 +65,4 @@ const express = require('express');
           res.json({
             message: `Found ${patientAppointments.length} appointment(s) for patient ${patientId}`,
             appointments: patientAppointments
-          });
-        } else {
-          res.status(404).json({ message: `No appointments found for patient ${patientId}` });
-        }
-      } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
-      }
-    });
-    
-    app.listen(port, '0.0.0.0', () => {
-      console.log(`Appointment service listening at http://0.0.0.0:${port}`);
-    });
+
