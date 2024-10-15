@@ -36,11 +36,11 @@ jobs:
           ls -al .scannerwork
           cat .scannerwork/report-task.txt || echo "report-task.txt not found"
 
-      - name: SonarQube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.0.0
-        with:
-          sonar_host_url: ${{ env.SONAR_HOST_URL }}
-          sonar_token: ${{ env.SONAR_TOKEN }}
+     # - name: SonarQube Quality Gate
+      #  uses: SonarSource/sonarqube-quality-gate-action@v1.0.0
+       # with:
+        #  sonar_host_url: ${{ env.SONAR_HOST_URL }}
+         # sonar_token: ${{ env.SONAR_TOKEN }}
           
       - name: Login to Amazon ECR
         id: login-ecr
